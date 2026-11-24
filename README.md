@@ -68,7 +68,12 @@ Runs code in an isolated, disposable Linux cloud container powered by [Blaxel](h
 * **Script:** [`blaxel_remote_executor.py`](blaxel_remote_executor.py)
 * **Key Feature:** Dynamic cloud container provisioning via `executor_type="blaxel"`, automatic package installation, and automatic teardown upon exit.
 
-### 3. Remote Cloud Sandbox — E2B Code Interpreter (`Sandbox`)
+### 3. Local Docker Container (`DockerExecutor`)
+Runs code locally inside an isolated Docker container on your machine using Docker Desktop.
+* **Script:** [`docker_executor.py`](docker_executor.py)
+* **Key Feature:** Complete local isolation via `executor_type="docker"` without needing third-party cloud APIs. Requires Docker Desktop running.
+
+### 4. Remote Cloud Sandbox — E2B Code Interpreter (`Sandbox`)
 Runs an entire multi-agent hierarchy inside a remote Jupyter cloud container powered by [E2B](https://e2b.dev).
 * **Script:** [`e2b_remote_executor.py`](e2b_remote_executor.py)
 * **Key Feature:** Demonstrates a **Manager Agent** delegating tasks to a specialized **Coder Agent** inside an isolated E2B cloud sandbox.
@@ -82,6 +87,9 @@ smolagents/
 ├── main.py                       # Main interactive Gradio AI Assistant with tools
 ├── multi_agent_manager.py        # Multi-Agent Manager + Coder Worker (Blaxel Cloud Sandbox)
 ├── blaxel_remote_executor.py     # Remote Cloud Sandbox execution demo (Blaxel)
+├── docker_executor.py            # Built-in Docker Container execution (smolagents)
+├── custom_docker_sandbox.py      # Hardened Custom Docker Sandbox (Resource limits & unprivileged user)
+├── Dockerfile                    # Container definition for custom Docker sandbox
 ├── e2b_remote_executor.py        # Remote Code Interpreter & Multi-Agent demo (E2B)
 ├── custom_executor_safeguard.py  # Local AST Sandbox security safeguards demo
 ├── image_tool.py                 # Custom tool: FLUX.1-schnell image generator
@@ -159,6 +167,18 @@ python3 custom_executor_safeguard.py
 Run a Manager Agent delegating algorithmic tasks to a specialized Coder Agent executing in an isolated Blaxel cloud sandbox:
 ```bash
 python3 multi_agent_manager.py
+```
+
+### Option F: Built-in Docker Container Sandbox
+Execute code in an isolated local Docker container managed by smolagents:
+```bash
+python3 docker_executor.py
+```
+
+### Option G: Custom Hardened Docker Sandbox
+Build and run a custom, hardened Docker container with memory/CPU limits and unprivileged user (`nobody`):
+```bash
+python3 custom_docker_sandbox.py
 ```
 
 ---
