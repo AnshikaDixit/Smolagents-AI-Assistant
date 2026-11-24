@@ -15,7 +15,7 @@ model = OpenAIServerModel(
     temperature=0.7,
 )
 
-# 3. Assemble the Agent with tools & guardrails - CodeAgent
+# 3. Assemble the Agent with tools & guardrails
 agent = CodeAgent(
     tools=[
         image_generation_tool,
@@ -23,7 +23,7 @@ agent = CodeAgent(
     ],
     model=model,
     max_steps=5,            # Guardrail: prevents runaway retry loops
-    add_base_tools=True,     # Includes default Python sandbox utilities
+    add_base_tools=True,    # Includes web_search, visit_webpage & Python utilities
 )
 
 # 4. Launch interactive Web UI
